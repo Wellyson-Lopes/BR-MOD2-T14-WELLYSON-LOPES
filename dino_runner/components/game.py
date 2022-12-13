@@ -1,7 +1,7 @@
 import pygame
 
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, HEART, RUNNING, SMALL_CACTUS
-
+from dino_runner.components.dinossaur import Dinossaur
 
 class Game:
     def __init__(self):
@@ -14,9 +14,10 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.x_pos_cactus = 1100
-        self.y_pos_cactus = 320
-        self.player_gravity = 0
+        #self.x_pos_cactus = 1100
+        #self.y_pos_cactus = 320
+        #self.player_gravity = 0
+        self.player = Dinossaur()
     
 
     def run(self):
@@ -26,8 +27,6 @@ class Game:
             self.events()
             self.update()
             self.draw()
-            #self.colisao()
-            #self.input_key()
         pygame.quit()
 
 
@@ -35,15 +34,15 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.player_rect.collidepoint(event.pos):
-                    print("Colisão")
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    self.player_gravity = -200
+            #if event.type == pygame.MOUSEBUTTONDOWN:
+                #if self.player_rect.collidepoint(event.pos):
+                    #print("Colisão")
+            #if event.type == pygame.KEYDOWN:
+                #if event.key == pygame.K_SPACE:
+                    #self.player_gravity = -200
 
     def update(self):
-       pass
+       self.player.update()
 
 
     def draw(self):
@@ -56,11 +55,11 @@ class Game:
         pygame.display.flip()
 
 
-    def player(self):
-        self.player_rect = RUNNING[0].get_rect(midbottom = (60, 395))  
-        self.player_gravity += 10        
-        self.player_rect.y += self.player_gravity 
-        self.screen.blit(RUNNING[0], self.player_rect)
+    #def player(self):
+        #self.player_rect = RUNNING[0].get_rect(midbottom = (60, 395))  
+        #self.player_gravity += 10        
+        #self.player_rect.y += self.player_gravity 
+       # self.screen.blit(RUNNING[0], self.player_rect)
              
 
     def small_cactus(self):
