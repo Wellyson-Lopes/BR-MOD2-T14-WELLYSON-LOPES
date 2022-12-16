@@ -35,7 +35,6 @@ class Dinosaur(Sprite):
         self.shield_time_up = 0
 
     def update(self, user_input):
-
         if self.running:
              self.run()
         elif self.jump:
@@ -43,7 +42,7 @@ class Dinosaur(Sprite):
         elif self.dino_duck:
             self.duck()
 
-        if user_input[pygame.K_UP] or user_input[pygame.K_SPACE] and not self.jump:
+        if user_input[pygame.K_SPACE] and not self.jump:
             AUDIO_JUMP = pygame.mixer.Sound('audios/jump.wav')
             AUDIO_JUMP.play()
             self.running = False
@@ -82,8 +81,7 @@ class Dinosaur(Sprite):
             self.dino_rect.y = Y_POS
             self.jump = False
             self.jump_vel = JUMP_VEL
-             # self.dino_rect.y += self.jump_vel * 4
-            # self.jump_vel += 1
+
           
     def duck(self):
         self.image = DUCK_IMG[self.image_type][self.step_index // 5]
@@ -92,10 +90,6 @@ class Dinosaur(Sprite):
         self.dino_rect.y = Y_POS_DUCK
         self.step_index += 1
         self.dino_duck = False
-        #O operador // divide e o resultado é sempre um numero inteiro, o mais proximo da divisão
-        # O operador / divide e o resultado é um numero com ponto flutuante, o mais preciso
-        # for i in range(0, 10):
-        #    print(i // 5)
 
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))

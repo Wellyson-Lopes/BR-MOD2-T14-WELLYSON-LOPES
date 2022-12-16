@@ -1,5 +1,3 @@
-
-
 from dino_runner.components.powerups.powerup import PowerUp
 from dino_runner.utils.constants import SHIELD, SHIELD_TYPE
 

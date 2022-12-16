@@ -19,7 +19,6 @@ class Power_Up_Manager:
             else:
                self.power_ups.append(Shield()) 
 
-
     def update(self, score, game_speed, player):
         self.generate_power(score)
         for power_up in self.power_ups:
@@ -41,6 +40,3 @@ class Power_Up_Manager:
     def reset_powerups(self):
         self.power_ups = []
         self.when_apears = random.randint(200, 300)
-
-        
-

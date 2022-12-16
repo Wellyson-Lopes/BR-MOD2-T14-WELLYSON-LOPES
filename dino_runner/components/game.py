@@ -1,7 +1,7 @@
 import pygame
 from time import sleep
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, BG_DINO, HEART
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, BG_DINO, HEART, KEYBOARD
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import Obstacle_Manager
 from dino_runner.components.powerups.power_up_manager import Power_Up_Manager
@@ -36,14 +36,11 @@ class Game:
         while self.running:
             if not self.playing:
                 self.show_menu()
-        #desliga o jogo
         pygame.display.quit()
-        #fecha a janela
         pygame.quit()
                
 
     def run(self):
-        # Game loop: events - update - draw
         self.playing = True        
         self.power_up_manager.reset_powerups()
         self.obstacle_manager.reset_obstacles()
@@ -88,7 +85,6 @@ class Game:
         pygame.display.update()
         pygame.display.flip()
 
-
     def draw_background(self):
         image_width = BG.get_width()
         self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
@@ -103,6 +99,7 @@ class Game:
             f"Score: {self.score}",self.screen,font_color=(0,100,0), pos_y_center = 50,pos_x_center=SCREEN_WIDTH - 140)
         draw_message_component(
             f"Record: {self.record}",self.screen,font_color=(0,100,0), pos_y_center = 20,pos_x_center=SCREEN_WIDTH - 140)
+
     def draw_life(self):
         if self.death_count == 0:
             draw_message_component("[Remaining Lives]", self.screen, 
@@ -141,15 +138,17 @@ class Game:
             if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
+                self.input = pygame.key.get_pressed()
             elif event.type == pygame.KEYDOWN:
                 self.run()
 
     def bg_menu(self):
-            self.image = BG_DINO.get_width()
-            self.screen.blit(BG_DINO, (0, 0))        
+            BG_DINO.get_width()
+            self.screen.blit(BG_DINO, (0, 0))
+            KEYBOARD.get_width()
+            self.screen.blit(KEYBOARD, (680, 10))        
 
     def show_menu(self):
-        
         self.screen.fill((255, 255, 255))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
@@ -171,17 +170,18 @@ class Game:
             self.screen,font_color=(255,255,255), pos_y_center=half_screen_height -125)  
             draw_message_component("Press any key to restart", self.screen,font_color=(255,255,255), 
             pos_y_center=half_screen_height + 140)
-            draw_message_component("You have 2 more lives", self.screen,font_color=(165,42,42), 
+            draw_message_component("You have 2 more lives", self.screen,font_size= 35, font_color=(165,42,42), 
             pos_y_center=half_screen_height + 180)
             draw_message_component(
                 f"Your Score:, {self.score}",
                 self.screen,
-                pos_y_center=half_screen_height - 150,
-                font_color=(255,255,255)
+                font_color=(255,255,255),
+                pos_y_center=half_screen_height - 150
             )            
             draw_message_component(
                 f"Death count: {self.death_count}",
                 self.screen,
+                font_color=(255,255,255),
                 pos_y_center=half_screen_height - 100
             )
             self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 30))
@@ -194,17 +194,18 @@ class Game:
             font_color=(255,255,255), pos_y_center=half_screen_height -125)      
             draw_message_component("Press any key to restart", self.screen,
             font_color=(255,255,255), pos_y_center=half_screen_height + 140)
-            draw_message_component("You have 1 more life", self.screen,
+            draw_message_component("You have 1 more life", self.screen,font_size= 35,
             font_color=(165,42,42), pos_y_center=half_screen_height + 180)
             draw_message_component(
                 f"Your Score:, {self.score}",
                 self.screen,
-                pos_y_center=half_screen_height - 150,
-                font_color=(255,255,255)
+                font_color=(255,255,255),
+                pos_y_center=half_screen_height - 150
             )            
             draw_message_component(
                 f"Death count: {self.death_count}",
                 self.screen,
+                font_color=(255,255,255),
                 pos_y_center=half_screen_height - 100
             )
             self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 30))
@@ -217,21 +218,22 @@ class Game:
             pos_y_center=half_screen_height + 140)                
             draw_message_component(f"Your personal record is:{self.record}", self.screen,
             font_color=(255,255,255), pos_y_center=half_screen_height -125)                
-            draw_message_component("You're dead", self.screen,
+            draw_message_component("You're dead", self.screen,font_size= 35,
             font_color=(165,42,42), pos_y_center=half_screen_height + 180)
             draw_message_component(
                 f"Your Score:, {self.score}",
                 self.screen,
-                pos_y_center=half_screen_height - 150,
-                font_color=(255,255,255)
+                font_color=(255,255,255),
+                pos_y_center=half_screen_height - 150
             )            
             draw_message_component(
                 f"Death count: {self.death_count}",
                 self.screen,
+                font_color=(255,255,255),
                 pos_y_center=half_screen_height - 100
             )
             self.screen.blit(ICON, (half_screen_width - 40, half_screen_height - 30))
-            
+
             self.playing = False
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:

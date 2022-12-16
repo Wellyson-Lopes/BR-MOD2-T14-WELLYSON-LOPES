@@ -34,7 +34,3 @@ class Obstacle_Manager:
 
     def reset_obstacles(self):
         self.obstacles = []
-        
-
-
-    
