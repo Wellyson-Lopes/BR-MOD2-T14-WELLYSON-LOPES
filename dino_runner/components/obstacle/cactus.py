@@ -11,10 +11,10 @@ CACTUS = [
 class Cactus(Obstacle):
   
     def __init__(self):
-            image, cactus_y_pos = CACTUS[0]
-            index = random.randint(0, 2)
-            super().__init__(image[index])
-            self.rect.y = cactus_y_pos 
+        image, cactus_y_pos = CACTUS[0]
+        index = random.randint(0, 2)
+        super().__init__(image[index])
+        self.rect.y = cactus_y_pos 
 
 class Large_Cactus(Obstacle):
         def __init__(self):
