@@ -1,8 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
+import os
 
-
-from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD, JUMPING, JUMPING_SHIELD,DUCKING, DUCKING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, RUNNING_HAMMER, DUCKING_HAMMER, JUMPING_HAMMER
+from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD, JUMPING, JUMPING_SHIELD,DUCKING, DUCKING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, RUNNING_HAMMER, DUCKING_HAMMER, JUMPING_HAMMER, AUDIO_DIR
 
 
 RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD, HAMMER_TYPE: RUNNING_HAMMER}
@@ -43,8 +43,9 @@ class Dinosaur(Sprite):
             self.duck()
 
         if user_input[pygame.K_SPACE] and not self.jump:
-            AUDIO_JUMP = pygame.mixer.Sound('audios/jump.wav')
+            AUDIO_JUMP = pygame.mixer.Sound(os.path.join(AUDIO_DIR,'audios/jump.wav'))
             AUDIO_JUMP.play()
+            pygame.mixer.music.play(1)
             self.running = False
             self.dino_duck = False
             self.jump = True

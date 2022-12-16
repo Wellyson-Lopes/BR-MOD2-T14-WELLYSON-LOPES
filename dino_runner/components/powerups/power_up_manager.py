@@ -1,6 +1,8 @@
 import random
 import pygame
+import os
 
+from dino_runner.utils.constants import AUDIO_DIR
 from dino_runner.components.powerups.shield import Shield
 from dino_runner.components.powerups.hammer import Hamer
 
@@ -24,7 +26,7 @@ class Power_Up_Manager:
         for power_up in self.power_ups:
             power_up.update(game_speed, self.power_ups)
             if player.dino_rect.colliderect(power_up.rect):
-                AUDIO_POWER = pygame.mixer.Sound('audios/coin.wav')
+                AUDIO_POWER = AUDIO_JUMP = pygame.mixer.Sound(os.path.join(AUDIO_DIR,'audios/coin.wav'))
                 AUDIO_POWER.play()
                 power_up.start_time = pygame.time.get_ticks()
                 player.image_type = power_up.power_type

@@ -1,5 +1,7 @@
 import random
 import pygame
+import os
+from dino_runner.utils.constants import AUDIO_DIR
 from dino_runner.components.obstacles.bird import Bird, Up_Bird
 from dino_runner.components.obstacles.cactus import Cactus
 
@@ -21,7 +23,7 @@ class Obstacle_Manager:
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                AUDIO_COLLIDE = pygame.mixer.Sound('audios/colisao.wav')
+                AUDIO_COLLIDE = AUDIO_JUMP = pygame.mixer.Sound(os.path.join(AUDIO_DIR,'audios/colisao.wav'))
                 AUDIO_COLLIDE.play()
                 if not game.player.has_power_up:
                     game.playing = False

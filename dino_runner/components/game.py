@@ -1,7 +1,7 @@
 import pygame
-from time import sleep
+import os
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, BG_DINO, HEART, KEYBOARD
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, BG_DINO, HEART, KEYBOARD, AUDIO_DIR
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import Obstacle_Manager
 from dino_runner.components.powerups.power_up_manager import Power_Up_Manager
@@ -29,7 +29,7 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = Obstacle_Manager()
         self.power_up_manager = Power_Up_Manager()
-        self.musica = pygame.mixer.music.load('audios/menu.mp3')
+        self.musica = pygame.mixer.music.load(os.path.join(AUDIO_DIR,'audios/menu.mp3'))
         pygame.mixer.music.play(-1)
     def execute(self):
         self.running = True
@@ -154,11 +154,7 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:            
-            self.bg_menu()
-            self.image = HEART
-            self.screen.blit(HEART, (30,30))   
-            self.screen.blit(HEART, (60,30))
-            self.screen.blit(HEART, (90,30))         
+            self.bg_menu()        
             draw_message_component("Welcome to Dino Runner", self.screen, font_color=(255,255,255), 
             pos_y_center= half_screen_height -100,font_size= 55)            
             draw_message_component("Press any key to start", self.screen, font_color=(255,255,255))
